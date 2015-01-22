@@ -12,6 +12,20 @@ class modelo extends CI_Model {
         $query = $this->db->query("select " . $strAtributos . " from " . $tabla . " " . $strInner . " where 1=1 " . $strConsulta);
         return $query->result_array();
     }
+    
+    function actualizar($tabla, $strId, $id, $data) {
+        $this->db->where($strId, $id);
+        $this->db->update($tabla, $data);
+    }
+
+    function ingreso($tabla, $data) {
+        $this->db->insert($tabla, $data);
+    }
+
+    function eliminar($tabla, $strId, $id) {
+        $this->db->where($strId, $id);
+        return $this->db->delete($tabla);
+    }
 
     function consulta($strConsulta) {
         $query = $this->db->query($strConsulta);
@@ -32,19 +46,7 @@ class modelo extends CI_Model {
         return $query->result_array();
     }
 
-    function actualizar($tabla, $strId, $id, $data) {
-        $this->db->where($strId, $id);
-        $this->db->update($tabla, $data);
-    }
-
-    function ingreso($tabla, $data) {
-        $this->db->insert($tabla, $data);
-    }
-
-    function eliminar($tabla, $strId, $id) {
-        $this->db->where($strId, $id);
-        return $this->db->delete($tabla);
-    }
+    
 
     function eliminar_todo($tabla) {
         //$this->db->where($strId, $id);
