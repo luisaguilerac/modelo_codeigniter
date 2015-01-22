@@ -1,6 +1,6 @@
 <?php
 
-class modelo_generico extends CI_Model {
+class modelo extends CI_Model {
 
     function __construct() {
         parent::__construct();
@@ -9,31 +9,25 @@ class modelo_generico extends CI_Model {
     }
 
     function listado($tabla, $strAtributos, $strInner, $strConsulta) {
-        //$this->db->limit($limit, $start);
         $query = $this->db->query("select " . $strAtributos . " from " . $tabla . " " . $strInner . " where 1=1 " . $strConsulta);
         return $query->result_array();
     }
 
     function consulta($strConsulta) {
-        //$this->db->limit($limit, $start);
         $query = $this->db->query($strConsulta);
-        //return $query->result_array();
     }
 
     function consulta_listado_bases() {
-        //$this->db->limit($limit, $start);
         $query = $this->dbutil->list_databases();
         return $query;
     }
 
     function crear_bd($bd) {
-        //$this->db->limit($limit, $start);
         $this->load->dbforge();
         return $this->dbforge->create_database($bd);
     }
 
     function listado_paginacion($tabla, $strAtributos, $strInner, $strConsulta, $limit, $start) {
-        //$this->db->limit($limit, $start);
         $query = $this->db->query("select " . $strAtributos . " from " . $tabla . " " . $strInner . " where 1=1 " . $strConsulta . " LIMIT " . $start . "," . $limit . " ");
         return $query->result_array();
     }
@@ -71,7 +65,6 @@ class modelo_generico extends CI_Model {
         if ($this->dbutil->database_exists($bd)) {
             $bool = 1;
         }
-
         return $bool;
     }
 
